@@ -1,0 +1,25 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>上传文件</title>
+</head>
+<body>
+    <form id="form1" name="form1" action="/Admin/UpFile" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" />
+        <input type="submit" name="上传" />
+        @if (Model != null)
+        {
+            <script type="text/javascript">
+                parent.document.getElementById("img1").src = "/Content/UpFile/Images/@Model";
+                parent.document.getElementById("img2").value = '@Model';
+            </script>
+        }
+    </form>
+</body>
+</html>

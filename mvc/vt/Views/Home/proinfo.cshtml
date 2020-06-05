@@ -1,0 +1,106 @@
+﻿@model DBModel.product
+@{
+    ViewBag.Title = "proinfo";
+}
+
+<div class="yf_product_main">
+    <div class="wrap">
+        @if (Model != null)
+        {
+            <div class="yf_product_row">
+                <div class="yf_product_row_left">
+                    <span>
+                        <a href="#">首页</a>/
+                        <a href="#">店</a>/
+                        <a href="#">产品详情</a>
+                    </span>
+                </div>
+                <div class="yf_product_row_right">
+                    <span>
+                        @if (ViewBag.prev != null)
+                        {
+                            <a href="/Home/proinfo?id=@ViewBag.prev.ID"><i class="fa fa-chevron-left"></i>上</a>
+                        }
+                        else
+                        {
+                            <span><i class="fa fa-chevron-left"></i>上</span>
+                        }
+                        \
+                        @if (ViewBag.next != null)
+                        {
+                            <a href="/Home/proinfo?id=@ViewBag.next.ID">下<i class="fa fa-chevron-right"></i></a>
+                        }
+                        else
+                        {
+                            <span>下<i class="fa fa-chevron-right"></i></span>
+                        }
+                    </span>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="yf_product_context">
+                <div class="yf_body">
+                    <input type="hidden" value="@Model.ID" class="id" />
+                    <div class="yf_body_left">
+                        @{
+                            string[] stra = Model.Picture.Split(',');
+                        }
+                        <img class="xxk_img yf_product_context_img" src="/Content/Home/image/@stra[0]" />
+                        <ul>
+                            @foreach(var i in stra){
+                                <li class="xxk_li"><img src="/Content/Home/image/@i" /></li>   
+                            }
+                        </ul>
+                    </div>
+                    <div class="yf_body_right">
+                        <h1>@Model.title</h1>
+                        <h2>￥ @Model.amount</h2>
+                        <p class="yf_product_context_p">@Model.sketch</p>
+                        <div class="yf_product_context_color">
+                            <span>颜色：</span>
+                            <ul>
+                                <li><a></a></li>
+                                <li><a></a></li>
+                                <li><a></a></li>
+                            </ul>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="yf_product_context_size">
+                            <span>大小：</span>
+                            <select>
+                                <option>XXS</option>
+                                <option>XS</option>
+                                <option>S</option>
+                                <option>M</option>
+                                <option>L</option>
+                                <option>XL</option>
+                                <option>XXL</option>
+                                <option>XXXL</option>
+                            </select>
+                            <div class="clear"></div>
+                        </div>
+                        <a class="gwc gwclink">添加到购物车</a>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="yf_product_botton">
+                <ul>
+                    <li class="yf_product_botton_on"><a href="#">详细信息</a></li>
+                    <li><a href="#">评论<span>（3）</span></a></li>
+                </ul>
+                <div class="clear"></div>
+                <div class="yf_product_botton_main">
+                    <h3>产品描述</h3>
+                    <p>@Model.describe</p>
+                    @*<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut per spici</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis delectus quidem repudiandae veniam distinctio repellendus magni pariatur molestiae asperiores animi, eos quod iusto hic doloremque iste a, nisi iure at unde molestias enim fugit, nulla voluptatibus. Deserunt voluptate tempora aut illum harum, deleniti laborum animi neque, praesentium explicabo, debitis ipsa?</p>*@
+                </div>
+            </div>
+        }
+        else
+        {
+            <p class="pro-null"><i class="fa fa-times-circle fa-5x" style="color:red;"></i>为什么你要这样...</p>
+        }
+    </div>
+</div>

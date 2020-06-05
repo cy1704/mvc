@@ -1,0 +1,46 @@
+﻿@model DBModel.User
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Information</title>
+    <link href="~/Content/Admin/css/Information.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="yhm"><span>用户名</span><input id="on" type="text" placeholder="@Model.name" readonly="readonly" /></div>
+    <div class="yhm"><span>真实姓名</span><input type="text" value="@Model.name2" /></div>
+    <div class="yhm"><span>性别</span><input type="text" value="@Model.sex" /></div>
+    <div class="container" id="vue">
+        <div class="row1">
+            <column>
+                <row name="出生年月"><leo-date sel-obj="dateObj" sel-key="'d1'"></leo-date></row>
+            </column>
+        </div>
+    </div>
+    <div class="yhm"><span>身份证</span><input type="text" value="@Model.IdentityCard" /></div>
+    <div class="yhm"><span>电话号码</span><input type="text" value="@Model.Phone" /></div>
+    <div class="yhm"><span>邮箱</span><input type="text" value="@Model.Email" /></div>
+    <div data-toggle="distpicker" class="yf">
+        <span>家庭住址</span>
+        <select data-province="---- 选择省 ----"></select>
+        <select data-city="---- 选择市 ----"></select>
+        <select data-district="---- 选择区 ----"></select>
+    </div>
+    <div class="but"><button>确定</button><button>重置</button></div>
+    <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <script src="https://www.jq22.com/jquery/vue.min.js"></script>
+    <script type="text/javascript" src="~/Content/Admin/Informationjs/components.js"></script>
+    <script type="text/javascript" src="~/Content/Admin/Informationjs/leo-scroll.js"></script>
+    <script type="text/javascript" src="~/Content/Admin/Informationjs/index.js"></script>
+    <script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
+    <script src="~/Content/Admin/Informationjs/distpicker.data.js"></script>
+    <script src="~/Content/Admin/Informationjs/distpicker.js"></script>
+    <script src="~/Content/Admin/Informationjs/main.js"></script>
+</body>
+</html>

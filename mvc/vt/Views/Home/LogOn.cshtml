@@ -1,0 +1,39 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LogOn</title>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/Home/js/sha1.js"></script>
+    <script src="~/Content/Home/js/logon.js"></script>
+    <link href="~/Content/Home/css/style.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="mai">
+        <div class="pyd_dl">
+            <div class="pyd_dl_top">
+                <img src="/Content/Home/image/logo.png" />
+                <span>用户登录</span>
+            </div>
+            <form action="/Home/LogOn" method="post">
+                <div class="pyd_dl_buttom">
+                    <ul>
+                        <li><input type="text" placeholder="账号" id="username" name="user" /></li>
+                        <li><input type="password" placeholder="密码" id="pwd" name="pwd" /></li>
+                        <li><input type="text" placeholder="验证码" name="code" /><img src="/Help/createImg" onclick="this.src='/Help/createImg?Id='+Math.random()" /></li>
+                        <li><input type="submit" value="登录"></li>
+                        <li><a class="pyd_jzmm"><span></span></a><span>记住密码</span></li>
+                        <li><a href="zhuce.html">立即注册！</a></li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

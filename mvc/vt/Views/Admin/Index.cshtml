@@ -1,0 +1,83 @@
+﻿@model DBModel.User
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/Admin/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/Admin/css/admin.css" rel="stylesheet" />
+    <script src="~/Content/Admin/js/index.js"></script>
+    <script language="javascript">
+        //防止页面后退
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+    </script>
+</head>
+<body class="index_body">
+    <div class="yf_index clear">
+        <div class="index_left">
+            <div class="index_logo">
+                <h2>YPYD</h2>
+            </div>
+            <div class="index_top">
+                <img src="~/Content/Admin/image/@Model.UserIcon" />
+                <p>您好!<span>@Model.name</span>,欢迎登陆</p>
+            </div>
+            <div class="index_main">
+                <div class="index_head index_on"><a href="/Admin/Index_Main" target="rightmain">首页</a><i class="fa fa-chevron-down" id="index_i"></i><span></span></div>
+                <ul class="index_ul">
+                    <li><a href="/Admin/lmgl" target="rightmain">栏目管理</a><span></span></li>
+                    <li><a href="/Admin/Product" target="rightmain">产品管理</a><span></span></li>
+                    <li><a href="/Admin/Journalism" target="rightmain">新闻管理</a><span></span></li>                                   
+                    <li><a href="#" target="rightmain">留言管理</a><span></span></li>
+                    <li><a href="#" target="rightmain">工程案例管理</a><span></span></li>
+                    <li><a href="#" target="rightmain">轮播图管理</a><span></span></li>
+                    <li><a href="#" target="rightmain">友情链接管理</a><span></span></li>
+                    <li><a href="/Admin/User_Control" target="rightmain">用户管理</a><span></span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="index_right">
+            <div class="index_right_head">
+                <div class="index_right_head_left">
+                    <i class="fa fa-outdent"></i>
+                    <span></span>
+                </div>
+                <div class="index_right_head_right">
+                    <div class="index_right_head_right_ss">
+                            <img src="~/Content/Admin/image/@Model.UserIcon" />
+                            <span class="index_right_head_right_span1">@Model.name</span>
+                            <i class="fa fa-caret-down"></i>
+                            <span class="index_right_head_right_span2"></span>
+                        <ul>
+                            <li class="index_right_head_right_ss_ul_li"><a href="/Admin/Information?id=@Model.id" target="rightmain">个人信息</a></li>
+                            <li class="index_right_head_right_ss_ul_li"><a href="#" target="rightmain">安全设置</a></li>
+                            <li><a href="/Admin/Login">退出登录</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            @*<div class="index_right_nav">
+                <div class="index_right_nav_left clear"><i class="fa fa-chevron-left"></i></div>
+                <ul class="clear index_right_nav_ul">
+                    <li class="index_right_nav_on">
+                        <i class="fa fa-desktop"></i>
+                        <a href="/Admin/Index_Main" target="rightmain">首页</a>
+                        <i class="fa fa-close" style="display:none"></i>
+                    </li>
+                </ul>
+                <div class="index_right_nav_right clear"><i class="fa fa-chevron-right"></i></div>
+            </div>*@
+            <iframe name="rightmain" src="/Admin/Index_Main"></iframe>
+        </div>
+    </div>
+</body>
+</html>

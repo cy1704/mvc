@@ -1,0 +1,58 @@
+﻿@model List<DBModel.product>
+<div class="yf_Clxp">
+    <div class="yf_Clxp_top">
+        <h2 class="yf_Clxp_top_h2">潮流新品</h2>
+    </div>
+    <div class="yf_Clxp_main">
+        <ul>
+            @if(Model!=null)
+            { 
+                foreach (var i in Model)
+                { 
+                <li>
+                    <div class="yf_Clxp_main_thumb">
+                        <img src="/Content/Home/image/@i.Picture.Split(',')[0]" />
+                        <div class="yf_Clxp_bj">
+                            <input type="hidden" value="@i.ID" class="id" />
+                            <ul>
+                                <li class="search"><i class="fa fa-search"></i></li>
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li class="gwclink"><a><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="yf_Clxp_main_content">
+                        <h4>@i.title</h4>
+                        <p class="price">@(i.amount)美元</p>
+                    </div>
+                </li>
+                }
+            }
+        </ul>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="yf_body_bj">
+    <div class="yf_dialog">
+        <div class="yf_body clear">
+            <input type="hidden" class="id" />
+            <div class="yf_body_left">
+                <div class="xxk_div"><img class="xxk_img" src="/Content/Home/image/product-2.jpg" /></div>
+                <ul>
+                    <li class="xxk_li"><img src="/Content/Home/image/product-2.jpg" /></li>
+                    <li class="xxk_li"><img src="/Content/Home/image/product-3.jpg" /></li>
+                    <li class="xxk_li"><img src="/Content/Home/image/product-4.jpg" /></li>
+                    <li class="xxk_li"><img src="/Content/Home/image/product-5.jpg" /></li>
+                </ul>
+            </div>
+            <div class="yf_body_right">
+                <h1 class="title">GM吊坠，玄武岩灰色</h1>
+                <h2>￥ <span class="amount">47.00</span></h2>
+                <p class="sketch">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem iusto nihil cum. Illo laborum numquam rem aut officia dicta cumque.</p>
+                <a class="gwc gwclink">添加到购物车</a>
+                <a class="ckxx" href="#">查看产品详情信息</a>
+            </div>
+        </div>
+    </div>
+    <div class="close"><i class="fa fa-close fa-2x"></i></div>
+</div>

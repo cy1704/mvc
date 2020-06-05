@@ -1,0 +1,43 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/Admin/css/index.css" rel="stylesheet" />
+    <script src="~/Content/Admin/js/index.js"></script>
+    
+</head>
+<body class="login_body">
+    <div class="wrap" style="margin:0 auto">
+        <form action="/Admin/User" method="post">
+            <div class="yf_login">
+                <div class="yf_login_logo">
+                    <img src="~/Content/Admin/image/logo.png" />
+                </div>
+                <div class="yf_login_item">
+                    <label>用户名</label>
+                    <input type="text" placeholder="请输入密码" name="name" class="yf_login_input" />
+                </div>
+                <div class="yf_login_item">
+                    <label>密码</label>
+                    <input type="password" placeholder="请输入密码" name="pwd" class="yf_login_input" />
+                </div>
+                <div class="yf_login_item yzm">
+                    <label>验证码</label>
+                    <input type="text" placeholder="请输入验证码" name="code" class="yf_login_input" />
+                    <img class="img" src="/Help/CreateImg" onclick="this.src='/Help/CreateImg?id='+Math.random()" />
+                </div>
+                <div class="yf_login_item yf_login_denglu">
+                    <input type="submit" value="登录" />
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

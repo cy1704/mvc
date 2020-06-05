@@ -1,0 +1,21 @@
+﻿@model List<DBModel.column>
+@if (Model!=null)
+{
+    <ul>
+    @foreach (var i in Model)
+    {
+        List<DBModel.column> list = BLL.columnbll.getlist(0, "pid=" + i.id);
+        if (list != null)
+        {
+            <li>
+                <a href="@(vt.Models.help.gettyle(i))">@i.title<i class="fa fa-angle-down"></i></a>
+                @{Html.RenderAction("Column", "Home", new { colid = i.id });}
+            </li>
+        }
+        else
+        {
+            <li><a href="@(vt.Models.help.gettyle(i))">@i.title</a></li>
+        }
+    }
+</ul>
+}

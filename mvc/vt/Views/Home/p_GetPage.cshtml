@@ -1,0 +1,46 @@
+﻿@{
+    int pagecount = ViewBag.pcount;
+    int pagesize = ViewBag.psize;
+    int rowcount = ViewBag.rcount;
+    int pageindex=ViewBag.pindex;
+    int start = (pageindex - 1) * pagesize + 1;
+    int end = start + pagesize - 1;
+    if (pageindex>=pagecount)
+    {
+        end = rowcount;
+    }
+}
+<p class="left">当前页 @pageindex/@pagecount 共 @rowcount 条记录 次序 @start-@end</p>
+<p class="right">
+    @if (pageindex > 1)
+    {
+        <a href="/Home/product?id=@(Convert.ToInt32(Request.QueryString["id"]))&&search=@(Request.QueryString["search"]!=null?Request.QueryString["search"].ToString():"")&&pageindex=1">首页</a>
+        <a href="/Home/product?id=@(Convert.ToInt32(Request.QueryString["id"]))&&search=@(Request.QueryString["search"]!=null?Request.QueryString["search"].ToString():"")&&pageindex=@(pageindex-1)">上一页</a>
+    }
+    else
+    {
+        <a>首页</a>
+        <a>上一页</a>
+    }
+    @for (int i = 1; i <= pagecount; i++)
+    {
+        if(i==pageindex)
+        {
+            <a>[@i]</a>
+        }
+        else
+        {
+            <a href="/Home/product?id=@(Convert.ToInt32(Request.QueryString["id"]))&&search=@(Request.QueryString["search"]!=null?Request.QueryString["search"].ToString():"")&&pageindex=@i">[@i]</a>
+        }
+    }
+    @if (pageindex < pagecount)
+    {
+        <a href="/Home/product?id=@(Convert.ToInt32(Request.QueryString["id"]))&&search=@(Request.QueryString["search"]!=null?Request.QueryString["search"].ToString():"")&&pageindex=@(pageindex+1)">下一页</a>
+        <a href="/Home/product?id=@(Convert.ToInt32(Request.QueryString["id"]))&&search=@(Request.QueryString["search"]!=null?Request.QueryString["search"].ToString():"")&&pageindex=@pagecount">尾页</a>
+    }
+    else
+    {
+        <a>下一页</a>
+        <a>尾页</a>
+    }
+</p>

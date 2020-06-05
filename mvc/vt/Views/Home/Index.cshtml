@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    List<DBModel.column> proindex = ViewBag.proindex;
+}
+
+
+
+<div class="banner">
+    <div class="ban_bd clear">
+        <div class="sli" style="background-image: url('/Content/Home/image/slider-1.jpg');">
+            <div class="wrap">
+                <div class="font" style="text-align:left;color:#fff;">
+                    <h1>Minimal  Summer Collection</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae aut illum ratione? <br /> Aliquam facilis dolorem dolor illum saepe commodi ratione.</p>
+                    <a href="#">立即购买</a>
+                </div>
+            </div>
+        </div>
+        <div class="sli" style="background: url('/Content/Home/image/slider-2.jpg');">
+            <div class="wrap">
+                <div class="font" style="text-align:center;color:#000;">
+                    <h1>Minimal  Summer Collection</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae aut illum ratione? <br /> Aliquam facilis dolorem dolor illum saepe commodi ratione.</p>
+                    <a href="#">立即购买</a>
+                </div>
+            </div>
+        </div>
+        <div class="sli" style="background: url('/Content/Home/image/slider-3.jpg');">
+            <div class="wrap">
+                <div class="font" style="text-align:left;color:#fff;">
+                    <h1>Minimal  Summer Collection</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae aut illum ratione? <br /> Aliquam facilis dolorem dolor illum saepe commodi ratione.</p>
+                    <a href="#">立即购买</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="prev"><i class="fa fa-chevron-circle-left"></i></button>
+    <button class="next"><i class="fa fa-chevron-circle-right"></i></button>
+</div>
+<div class="mainer">
+    <div class="wrap">
+        <div class="pyd_cpfl">
+            <h3>产品分类</h3>
+            <div class="pyd_cpfl_left">
+                @for (int i = 0; i < 2; i++)
+                {
+                    DBModel.column model = proindex[i];
+                    <div class="pyd_cpfl_div" id="pyd_h@(i+1)">
+                    <a href="@vt.Models.help.gettyle(model)">
+                        <h2>@(model.title)</h2>
+                        <h4>@(model.Content)</h4>
+                        <img src="/Content/Home/image/@(model.Picture)" />
+                    </a>
+                </div>
+                }
+            </div>
+            <div class="pyd_cpfl_div pyd_cpfl_right" id="pyd_h3">
+                <a href="@vt.Models.help.gettyle(proindex[2])">
+                    <h2>@proindex[2].title</h2>
+                    <h4>@proindex[2].Content</h4>
+                    <img src="/Content/Home/image/@(proindex[2].Picture)" />
+                </a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        @{Html.RenderAction("productindex", "Home");}
+        <div class="pyd_pp">
+            <h3>服装品牌</h3>
+            <div class="pyd_pp_ul">
+                <ul>
+                    <li><a href="#"><img src="/Content/Home/image/pyd_logo1.png" /></a></li>
+                    <li><a href="#"><img src="/Content/Home/image/pyd_logo2.png" /></a></li>
+                    <li><a href="#"><img src="/Content/Home/image/pyd_logo3.png" /></a></li>
+                    <li><a href="#"><img src="/Content/Home/image/pyd_logo4.png" /></a></li>
+                    <li><a href="#"><img src="/Content/Home/image/pyd_logo5.png" /></a></li>
+                    <li><a href="#"><img src="/Content/Home/image/pyd_logo6.png" /></a></li>
+                    <li><a href="#"><img src="/Content/Home/image/pyd_logo7.png" /></a></li>
+                    <li><a href="#"><img src="/Content/Home/image/pyd_logo8.png" /></a></li>
+                    <li><a href="#"><img src="/Content/Home/image/pyd_logo9.png" /></a></li>
+                    <li><a href="#"><img src="/Content/Home/image/pyd_logo10.png" /></a></li>
+                    <li><a href="#"><img src="/Content/Home/image/pyd_logo11.png" /></a></li>
+                    <li><a href="#"><img src="/Content/Home/image/pyd_logo12.png" /></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

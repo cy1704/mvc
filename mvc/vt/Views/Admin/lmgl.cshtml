@@ -1,0 +1,49 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>lmgl</title>
+    <link href="~/Content/Admin/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/Admin/css/admin.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/Admin/js/index.js"></script>
+</head>
+<body style="width:97.5%;">
+
+    <div class="dyj_grzx">
+        <div class="grzx_top">
+            <h1>栏目管理</h1>
+            <div class="grzx_main">
+                <form action="/Admin/lmgl" method="post" style="display:inline-block">
+                    <input class="ss" type="text" placeholder="栏目查询" value="@Request["where"]" name="where" />
+                    <button type="submit"><i class="fa fa-search fa-inverse"></i></button>
+                </form>
+                <a class="tj" href="/Admin/Updatelmgl?act=add">添加栏目</a>
+            </div>
+        </div>
+        <div class="grzx_main">
+            <div style="overflow:auto;">
+                <table border="0" cellspacing="0">
+                    <tr>
+                        <td>ID</td>
+                        <td>栏目名称</td>
+                        <td>父级栏目</td>
+                        <td>排序</td>
+                        <td>类型</td>
+                        <td>是否隐藏</td>
+                        <td>修改时间</td>
+                        <td>操作</td>
+                    </tr>
+                    @{Html.RenderAction("GetClass", "Admin");}
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

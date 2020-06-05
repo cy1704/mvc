@@ -1,0 +1,48 @@
+﻿@model List<DBModel.lmgl>
+@if (Model != null)
+{
+    foreach (var m in Model)
+    {
+        <tr>
+            <td>@m.Id</td>
+            <td>@m.Title</td>
+            <td>@vt.Models.help.fj(m.Pid)</td>
+            <td>@m.Sort</td>
+            @switch (m.Ctype)
+            {
+                case 0:
+                    <td>文字列表</td>
+                    break;
+                case 1:
+                <td>图片列表</td>
+                    break;
+                case 2:
+                <td>单页信息</td>
+                    break;
+                default:
+                <td>其他</td>
+                    break;
+            }
+            <td>
+                @if (m.IsHide)
+                {
+                    <a style="color:green" href="/Admin/UpdatHide?ishide=@m.IsHide.ToString()&id=@m.Id" onclick="return confirm('是否显示？')">是</a>
+                }
+                else
+                {
+                    <a style="color:red" href="/Admin/UpdatHide?ishide=@m.IsHide.ToString()&id=@m.Id" onclick="return confirm('是否隐藏？')">否</a>
+                }
+            </td>
+            <td>@m.Cdate</td>
+            <td>
+                <a href="/Admin/Updatelmgl?id=@m.Id" onclick="return confirm('是否编辑？')" class="fa fa-pencil" title="编辑"></a>
+                <a href="/Admin/Deletelmgl?id=@m.Id" onclick="return confirm('是否删除？')" class="fa fa-trash-o" title="删除"></a>
+            </td>
+            @if (Request["where"] == null || Request["where"] == "")
+	        {
+		        Html.RenderAction("GetClass", "Admin", new { id = m.Id });
+	        } 
+        </tr>
+    }
+
+}

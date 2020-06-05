@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="mainer">
+    <div class="wrap">
+        <div class="cartinfo">
+            @if (Session["cart"]!=null)
+            {
+                List<vt.Models.Cart> list = (Session["cart"] as List<vt.Models.Cart>);
+            <table>
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" />全选</th>
+                        <th align="left">商品</th>
+                        <th>单价</th>
+                        <th>数量</th>
+                        <th>小计</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        @foreach(var i in list){
+                            <tr>
+                            <td><input type="checkbox" />选择</td>
+                            <td>
+                                <div class="img"><img src="/Content/Home/image/@i.product.Picture.Split(',')[0]" /></div>
+                                <div class="right">
+                                    <p>@i.product.title</p>
+                                </div>
+                            </td>
+                            <td>￥ @i.product.amount</td>
+                            <td>
+                                <input type="number" value="@i.amount" min="1" />
+                            </td>
+                            <td>￥ @(i.amount * i.product.amount)</td>
+                            <td>
+                                @*<a title="加入收藏" href="#"><font color="#000"><i class="fa fa-heart-o"></i></font></a>*@
+                                <a title="从购物车中移除" href="#"><font color="#000"><i class="fa fa-remove"></i></font></a>
+                            </td>
+                        </tr>
+                        }
+                </tbody>
+            </table>
+            <div class="button">
+                <a href="#">全部移除</a>
+                <a href="#">结算</a>
+            </div>
+            }
+        </div>
+    </div>
+</div>

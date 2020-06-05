@@ -1,0 +1,90 @@
+﻿<div class="header">
+    <div class="wrap">
+        <div class="h_top  clear">
+            <div class="h_t_phone">
+                <i class="fa fa-phone fa-lg"></i> 123-123456789
+            </div>
+            <div class="logo"><a href="/Home/Index">YPYD</a></div>
+            <div class="h_t_r">
+                <ul>
+                    <li>
+                        <a href="#"><i class="fa fa-shopping-cart fa-lg"></i><span>购物车</span></a>
+                        <div class="top-gwc top-div">
+
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-search fa-lg"></i><span>搜索</span></a>
+                        <div class="top-search top-div">
+                            <form action="/Home/search" method="post">
+                                <input type="hidden" name="id" value="@(Request.QueryString["id"])" />
+                                <input type="search" name="search" id="search" autocomplete="off" placeholder="搜索..." />
+                                <input id="search_but" type="submit" hidden="hidden" />
+                            </form>
+                            <script>
+                                $("#search").click(function (event) {
+                                    if (event.keyCode == 13) {
+                                        $("#search_but").click();
+                                    }
+                                });
+                            </script>
+                        </div>
+                    </li>
+                    @if (Session["admin"] == null)
+                    {
+                        <li>
+                            <a href="#"><i class="fa fa-user-circle-o fa-lg"></i>登陆</a>
+                            <div class="top-div">
+                                <p>你还没有登录，请先<a href="/Home/LogOn" class="logon">登录</a></p>
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        DBModel.User admin = Session["admin"] as DBModel.User;
+                        <li>
+                            <a href="#"><i><img class="userico" src="../Content/Home/image/@admin.UserIcon" /></i>@admin.name</a>
+                            <div class="top-login top-div">
+                                <div class="userinfo">
+                                    <div class="ico"><img src="../Content/Home/image/@admin.UserIcon" /></div>
+                                    <h2>
+                                        @admin.name
+                                        <span>
+                                        @switch (admin.grade)
+                                        {
+                                            case 0:
+                                                <font>普通会员</font>
+                                                break;
+                                            case 1:
+                                            <font>超级会员</font>
+                                                break;
+                                            case 2:
+                                            <font>后台管理员</font>
+                                                break;
+                                            default:
+                                            <font>总管理员</font>
+                                                break;
+                                        }
+                                        </span>
+                                    </h2>
+                                    <p>邮箱：</p>
+                                    <p>注册时间：@(@admin.cdate.ToString("yyyy年MM月dd日"))</p>
+                                </div>
+                                <div class="action">
+                                    <ul>
+                                        <li><a href="#">个人信息</a></li>
+                                        <li><a onclick="$('.logout').fadeIn()">退出登录</a></li>
+                                    </ul>
+                                    <p class="logout">确认退出吗？<a href="/Home/LogOut"><font color="red">确认</font></a>  <a onclick="$('.logout').fadeOut()">取消</a></p>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <nav>
+            @{Html.RenderAction("Column", "Home");}
+        </nav>
+    </div>
+</div>
