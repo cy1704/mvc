@@ -30,8 +30,6 @@
                         @Html.TextBoxFor(a => a.title)
                         @Html.CheckBoxFor(a => a.isHide)
                         隐藏
-                        @Html.CheckBoxFor(a => a.Isindex)
-                        首页显示
                     </td>
                 </tr>
                 <tr>
@@ -69,6 +67,9 @@
                     </td>
                 </tr>
             </table>
+            <script type="text/javascript">
+                var ue = UE.getEditor('content');
+            </script>
         }
     </div>
 </body>

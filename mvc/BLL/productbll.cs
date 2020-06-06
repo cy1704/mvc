@@ -36,9 +36,5 @@ namespace BLL
         {
             return DAL.productdal.UpdatHide(isHide,id);
         }
-        public static int UpIsindex(string Isindex, string id)
-        {
-            return DAL.productdal.UpIsindex(Isindex, id);
-        }
     }
 }

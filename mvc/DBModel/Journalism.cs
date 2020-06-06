@@ -17,7 +17,6 @@ namespace DBModel
         public bool IsHide { get; set; }
         public DateTime Cdate { get; set; }
         public string Author{ get; set; }
-        public bool Isindex { get; set; }
         public int Watch { get; set; }
         public string Content { get; set; }
     }

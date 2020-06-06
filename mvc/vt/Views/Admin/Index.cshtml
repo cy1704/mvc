@@ -13,6 +13,13 @@
     <link href="~/Content/Admin/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Content/Admin/css/admin.css" rel="stylesheet" />
     <script src="~/Content/Admin/js/index.js"></script>
+    <script language="javascript">
+        //防止页面后退
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+    </script>
 </head>
 <body class="index_body">
     <div class="yf_index clear">
@@ -29,12 +36,12 @@
                 <ul class="index_ul">
                     <li><a href="/Admin/lmgl" target="rightmain">栏目管理</a><span></span></li>
                     <li><a href="/Admin/Product" target="rightmain">产品管理</a><span></span></li>
-                    <li><a href="/Admin/Journalism" target="rightmain">新闻管理</a><span></span></li>
-                    <li><a href="/Admin/Friendship" target="rightmain">友情链接管理</a><span></span></li>                                   
+                    <li><a href="/Admin/Journalism" target="rightmain">新闻管理</a><span></span></li>                                   
+                    <li><a href="#" target="rightmain">留言管理</a><span></span></li>
+                    <li><a href="#" target="rightmain">工程案例管理</a><span></span></li>
+                    <li><a href="#" target="rightmain">轮播图管理</a><span></span></li>
+                    <li><a href="#" target="rightmain">友情链接管理</a><span></span></li>
                     <li><a href="/Admin/User_Control" target="rightmain">用户管理</a><span></span></li>
-                    <li><a href="/Admin/Message" target="rightmain">留言管理</a><span></span></li>
-                    <li><a href="/Admin/Cases" target="rightmain">工程案例管理</a><span></span></li>
-                    <li><a href="/Admin/Rotation" target="rightmain">轮播图管理</a><span></span></li>
                 </ul>
             </div>
         </div>
@@ -53,7 +60,7 @@
                         <ul>
                             <li class="index_right_head_right_ss_ul_li"><a href="/Admin/Information?id=@Model.id" target="rightmain">个人信息</a></li>
                             <li class="index_right_head_right_ss_ul_li"><a href="#" target="rightmain">安全设置</a></li>
-                            <li><a href="#">退出登录</a></li>
+                            <li><a href="/Admin/Login">退出登录</a></li>
                         </ul>
                     </div>
                 </div>
