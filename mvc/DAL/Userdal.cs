@@ -9,7 +9,6 @@ namespace DAL
 {
     public class Userdal
     {
-        static string Tname = "[User]";
         public static DBModel.User GetModel(string name,string pwd)
         {
             string sql = Help.strhelp.select("[User]", 0, "name='"+name+"' and pwd='"+pwd+"'");
@@ -22,24 +21,6 @@ namespace DAL
             SqlDataReader dr = Help.sqlhelp.getdata(sql);
             return Help.datahelp.getmodel<DBModel.User>(dr);
         }
-        public static void GetEdit(int id, string name, string pwd)
-        {
-            string sql = "";
-            if (id > 0)
-            {
-                sql = "update [User] set Name=@name,Pwd=@pwd where id="+id;
-            }
-            else
-            {
-                sql = "insert into [User] (Name,Pwd) values (@name,@pwd)";
-                
-            }
-            SqlParameter[] p ={
-                                 new SqlParameter("@name",name),
-                                 new SqlParameter("@pwd",pwd)
-                             };
-            Help.sqlhelp.execute(sql, CommandType.Text, p);
-        }
         public static void GetUpdate(string name, string pwd)
         {
             string sql = "update [User] set LogoCount=LogoCount+1,cdate=getdate() where name=@name and pwd=@pwd";
@@ -47,12 +28,13 @@ namespace DAL
                                  new SqlParameter("@name",name),
                                  new SqlParameter("@pwd",pwd)
                              };
-            Help.sqlhelp.execute(sql, CommandType.Text, p);
+            Help.sqlhelp.execute(sql,CommandType.Text,p);
         }
-        public static List<DBModel.User> getlist(int top, string where)
+        public static List<DBModel.User> Getlist()
         {
-            string sql = Help.strhelp.select(Tname, top, where);
-            return Help.datahelp.getlist<DBModel.User>(Help.sqlhelp.getdata(sql));
+            string sql = "select * from [User]";
+            SqlDataReader dr = Help.sqlhelp.getdata(sql);
+            return Help.datahelp.getlist<DBModel.User>(dr);
         }
         public static int GetDelete(int id)
         {

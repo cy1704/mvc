@@ -14,7 +14,6 @@
     <script src="~/utf8-net/ueditor.all.min.js"></script>
     <script src="~/utf8-net/lang/zh-cn/zh-cn.js"></script>
     <link href="~/utf8-net/themes/iframe.css" rel="stylesheet" />
-    <link href="~/Content/Admin/css/admin.css" rel="stylesheet" />
 </head>
 <body>
     <div class="lmgl-main">
@@ -31,6 +30,8 @@
                         @Html.TextBoxFor(a => a.Title)
                         @Html.CheckBoxFor(a => a.IsHide)
                         隐藏
+                        @Html.CheckBoxFor(a => a.Isindex)
+                        首页显示
                     </td>
                 </tr>
                 <tr>
@@ -72,9 +73,6 @@
                     </td>
                 </tr>
             </table>
-            <script type="text/javascript">
-                var ue = UE.getEditor('content');
-            </script>
         }
     </div>
 </body>
