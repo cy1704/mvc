@@ -18,7 +18,13 @@
     <div class="dyj_grzx">
         <div class="grzx_top">
             <h1>栏目管理</h1>
-            <h3 style="right:0"><a style="float:right;right:0;" href="/Admin/Updatelmgl?act=add">添加栏目</a></h3>
+            <div class="grzx_main">
+                <form action="/Admin/lmgl" method="post" style="display:inline-block">
+                    <input class="ss" type="text" placeholder="栏目查询" value="@Request["where"]" name="where" />
+                    <button type="submit"><i class="fa fa-search fa-inverse"></i></button>
+                </form>
+                <a class="tj" href="/Admin/Updatelmgl?act=add">添加栏目</a>
+            </div>
         </div>
         <div class="grzx_main">
             <div style="overflow:auto;">

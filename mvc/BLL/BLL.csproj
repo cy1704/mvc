@@ -39,15 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Casesbll.cs" />
     <Compile Include="columnbll.cs" />
-    <Compile Include="Friendshipbll.cs" />
     <Compile Include="Journalism.cs" />
     <Compile Include="lmglbll.cs" />
-    <Compile Include="Messagebll.cs" />
     <Compile Include="productbll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rotationbll.cs" />
     <Compile Include="Userbll.cs" />
   </ItemGroup>
   <ItemGroup>

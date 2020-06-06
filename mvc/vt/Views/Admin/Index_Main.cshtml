@@ -9,8 +9,53 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index_Main</title>
+    <link href="~/Content/Admin/css/index2.css" rel="stylesheet" />
 </head>
-<body>
-    <span>后台首页</span>
+<body class="sy-body">
+    <div class="sy-right-main">
+        <table>
+            <tr><th colspan="7">系统信息统计</th></tr>
+            <tr>
+                <td class="sy-right-main-ss">服务器类型</td>
+                <td>站点物理路径</td>
+                <td>FSO文本读写</td>
+                <td>当前版本</td>
+                <td>浏览器类型</td>
+                <td>网站地址</td>
+                <td>数据库使用</td>
+            </tr>
+            <tr>
+                <td>@Request.UserHostAddress</td>
+                <td>@HttpContext.Current.Server.MapPath("~/")</td>
+                <td>√</td>
+                <td>完美版</td>
+                <td>@HttpContext.Current.Request.Browser.Type</td>
+                <td>localhost</td>
+                <td>SqlServer</td>
+            </tr>
+        </table>
+        <table>
+            <tr><th colspan="2">官方新闻</th></tr>
+            <tr>
+                @{
+                    DBModel.User m = Session["user"] as DBModel.User;
+                }
+                <td>管理员名称：@m.name</td>
+                <td>权限：管理员</td>
+            </tr>
+            <tr>
+                <td>上次登录时间：@m.cdate</td>
+                <td>登录次数：@m.LogoCount</td>
+            </tr>
+            <tr>
+                <td>屏幕要求：√</td>
+                <td>浏览器：需要浏览器为<span>IE6.0</span>或以上版本才能正常运行！！！</td>
+            </tr>
+            <tr>
+                <td colspan="2">当前版本：完美版</td>
+            </tr>
+        </table>
+        <p>Copyright ? 2007-2008 All rights reserved.<span>广州中奥建筑有限公司</span></p>
+    </div>
 </body>
 </html>
