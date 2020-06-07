@@ -1,4 +1,4 @@
-﻿@model DBModel.lmgl
+﻿@model DBModel.Friendship
 @{
     Layout = null;
 }
@@ -17,7 +17,7 @@
 </head>
 <body>
     <div class="lmgl-main">
-        @using (Html.BeginForm("Tijiao", "Admin", new { }, FormMethod.Post))
+        @using (Html.BeginForm("Friendship_Edit", "Admin", new { }, FormMethod.Post))
         {
             <table>
                 <tr>
@@ -26,19 +26,11 @@
                 <tr>
                     <td><u>名称</u></td>
                     <td>
-                        @Html.HiddenFor(a => a.Id)
+                        @Html.HiddenFor(a => a.ID)
                         @Html.TextBoxFor(a => a.Title)
                         @Html.CheckBoxFor(a => a.IsHide)
                         隐藏
                     </td>
-                </tr>
-                <tr>
-                    <td><u>父类</u></td>
-                    <td>@Html.DropDownList("pid")</td>
-                </tr>
-                <tr>
-                    <td><u>类型</u></td>
-                    <td>@Html.DropDownList("ctype")</td>
                 </tr>
                 <tr>
                     <td><u>排序</u></td>
@@ -51,18 +43,14 @@
                 <tr>
                     <td><u>所示图片</u></td>
                     <td>
-                        <img src="/Content/UpFile/Images/@Model.Picture" style="position:absolute;top:80px;right:100px;width:200px;height:150px;" id="img1" />
+                        <img src="/Content/UpFile/Images/@Model.Picure" style="position:absolute;top:80px;right:100px;width:200px;height:150px;" id="img1" />
                         <iframe src="/Admin/UpFile" style="width:350px;height:35px;" frameborder="0" scrolling="yes"></iframe>
-                        <input type="hidden" name="Picture" id="img2" />
+                        <input type="hidden" name="Picure" id="img2" />
                     </td>
                 </tr>
                 <tr>
                     <td><u>日期</u></td>
                     <td>@Html.TextBoxFor(m => m.Cdate, "", new { @class = "Wdate", width = "100px", onclick = "WdatePicker()" })</td>
-                </tr>
-                <tr>
-                    <td><u>内容</u></td>
-                    <td><textarea id="content" name="content" style="width:800px; height:350px;">@Model.Content</textarea></td>
                 </tr>
                 <tr>
                     <td colspan="2" style="text-align:center">
@@ -73,6 +61,5 @@
             </table>
         }
     </div>
-
 </body>
 </html>

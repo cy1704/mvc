@@ -28,5 +28,9 @@ namespace BLL
         {
             return DAL.Journalism.hang(model);
         }
+        public static int UpIsindex(string Isindex, string id)
+        {
+            return DAL.Journalism.UpIsindex(Isindex,id);
+        }
     }
 }
