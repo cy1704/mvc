@@ -39,11 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Casedal.cs" />
     <Compile Include="columndal.cs" />
+    <Compile Include="Friendshipdal.cs" />
     <Compile Include="Journalism.cs" />
     <Compile Include="lmgldal.cs" />
+    <Compile Include="Messagedal.cs" />
     <Compile Include="productdal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rotationdal.cs" />
     <Compile Include="Userdal.cs" />
   </ItemGroup>
   <ItemGroup>

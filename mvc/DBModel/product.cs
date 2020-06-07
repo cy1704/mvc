@@ -15,7 +15,7 @@ namespace DBModel
         public int Pid { set; get; }
         public int sort { set; get; }
         public bool isHide { set; get; }
-
+        public bool Isindex { set; get; }
         public DateTime CDate { set; get; }
         public string Content { set; get; }
     }
