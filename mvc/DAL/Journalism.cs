@@ -35,7 +35,7 @@ namespace DAL
         {
             if (model.Id > 0)
             {
-                string sql = "update Journalism set Title=@title,Picure=@Picure,LinkUrl=@LinkUrl,Pid=@Pid,Sort=@sort,IsHide=@isHide,Cdate=@cdate,Author=@Author,[Content]=@Content,Isindex=@Isindex where Id=@ID";
+                string sql = "update Journalism set Title=@title,Picure=@Picure,LinkUrl=@LinkUrl,Pid=@Pid,Sort=@sort,IsHide=@isHide,Cdate=@cdate,Author=@Author,[Content]=@Content where Id=@ID";
                 SqlParameter[] p ={
                                  new SqlParameter("@title",model.Title),
                                  new SqlParameter("@Picure",model.Picure),
@@ -46,7 +46,6 @@ namespace DAL
                                  new SqlParameter("@cdate",model.Cdate),
                                  new SqlParameter("@Author",model.Author),
                                  new SqlParameter("@content",model.Content),
-                                 new SqlParameter("@Isindex",model.Isindex),
                                  new SqlParameter("@ID",model.Id)
                              };
 
@@ -54,7 +53,7 @@ namespace DAL
             }
             else
             {
-                string sql = "insert into Journalism (Title,Picure,LinkUrl,Pid,Sort,IsHide,Cdate,Author,Content,Watch,Isindex) values (@title,@Picure,@LinkUrl,@Pid,@sort,@isHide,@cdate,@Author,@content,"+1+",@Isindex)";
+                string sql = "insert into Journalism (Title,Picure,LinkUrl,Pid,Sort,IsHide,Cdate,Author,Content,Watch) values (@title,@Picure,@LinkUrl,@Pid,@sort,@isHide,@cdate,@Author,@content,"+1+")";
                 SqlParameter[] p ={
                                  new SqlParameter("@title",model.Title),
                                  new SqlParameter("@Picure",model.Picure),
@@ -64,17 +63,10 @@ namespace DAL
                                  new SqlParameter("@isHide",model.IsHide),
                                  new SqlParameter("@cdate",model.Cdate),
                                  new SqlParameter("@Author",model.Author),
-                                 new SqlParameter("@Isindex",model.Isindex),
                                  new SqlParameter("@content",model.Content)
                              };
                 return Help.sqlhelp.execute(sql, CommandType.Text,p);
             }
-        }
-        public static int UpIsindex(string Isindex, string id)
-        {
-            int ss = Convert.ToInt32(!Convert.ToBoolean(Isindex));
-            string sql = "update Journalism set IsIndex=" + ss + " where id=" + id;
-            return Help.sqlhelp.execute(sql);
         }
     }
 }

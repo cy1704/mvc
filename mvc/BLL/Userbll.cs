@@ -16,13 +16,17 @@ namespace BLL
         {
             return DAL.Userdal.GetModel(id);
         }
+        public static void GetEdit(int id, string name, string pwd)
+        {
+            DAL.Userdal.GetEdit(id, name, pwd);
+        }
         public static void GetUpdate(string name, string pwd)
         {
             DAL.Userdal.GetUpdate(name, pwd);
         }
-        public static List<DBModel.User> Getlist()
+        public static List<DBModel.User> getlist(int top, string where)
         {
-            return DAL.Userdal.Getlist();
+            return DAL.Userdal.getlist(top, where);
         }
         public static int GetDelete(int id)
         {

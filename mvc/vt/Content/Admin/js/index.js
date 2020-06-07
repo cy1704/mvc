@@ -19,6 +19,7 @@
             $(this).parent().removeClass("layui-input-active");
         }
     })
+
     var index1=true;
     $("#index_i").click(function () {
         if (index1) {
