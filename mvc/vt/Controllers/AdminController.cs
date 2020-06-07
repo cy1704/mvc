@@ -45,41 +45,10 @@ namespace vt.Controllers
         {
             return View();
         }
-        public ActionResult User_Control(string where = "")
+        public ActionResult User_Control()
         {
-            List<DBModel.User> list = new List<DBModel.User>();
-            if (where == "")
-            {
-                list = BLL.Userbll.getlist(0,"");
-            }
-            else
-            {
-                list = BLL.Userbll.getlist(0, "Name like '%" + where + "%'");
-            }
+            var list = BLL.Userbll.Getlist();
             return View(list);
-        }
-        public ActionResult User_Edit(string id)
-        {
-            DBModel.User model = new DBModel.User();
-            if (id!=null)
-            {
-                model = BLL.Userbll.GetModel(id);
-            }
-            return View(model);
-        }
-        [HttpPost]
-        public ActionResult User_Edit(int id, string name, string pwd)
-        {
-            if (id >0)
-            {
-                BLL.Userbll.GetEdit(id,name, pwd);
-                return Content("<script>alert('编辑成功');location.href='/Admin/User_Control'</script>");
-            }
-            else
-            {
-                BLL.Userbll.GetEdit(id, name, pwd);
-                return Content("<script>alert('添加成功');location.href='/Admin/User_Control'</script>");
-            }
         }
         public ActionResult User_Delete(int id)
         {
@@ -102,21 +71,13 @@ namespace vt.Controllers
             return View();
         }
         [ChildActionOnly]
-        public ActionResult GetClass(int id = 0, string where = "")
+        public ActionResult GetClass(int id =0)
         {
             var model = new List<DBModel.lmgl>();
-            if (where == "")
+            model = BLL.lmglbll.Getlist(0, "pid=0");
+            if (id != 0)
             {
-                model = BLL.lmglbll.Getlist(0, "pid=0");
-                if (id != 0)
-                {
-                    model = BLL.lmglbll.Getlist(0, "pid=" + id);
-                }
-            }
-            else
-            {
-                model = BLL.lmglbll.Getlist(0, "title like '%" + where + "%'");
-                
+                model = BLL.lmglbll.Getlist(0, "pid=" + id);
             }
             return PartialView(model);
         }
@@ -261,17 +222,9 @@ namespace vt.Controllers
             BLL.lmglbll.delete(id);
             return Content("<script>alert('删除成功！');location.href='/Admin/lmgl'</script>");
         }
-        public ActionResult Product(string where="")
+        public ActionResult Product()
         {
-            List<DBModel.product> Productlist = new List<DBModel.product>();
-            if (where == "")
-            {
-                Productlist = BLL.productbll.getlist(0, "id>0 order by Sort");
-            }
-            else
-            {
-                Productlist = BLL.productbll.getlist(0, "title like '%" + where + "%'");
-            }
+            List<DBModel.product> Productlist = BLL.productbll.getlist(0,"id>0 order by Sort");
             return View(Productlist);
         }
         public ActionResult Product_Edit(int id = 0)
@@ -279,13 +232,11 @@ namespace vt.Controllers
             DBModel.product model=new DBModel.product();
             if(id>0)
             {
-                ViewBag.opera = "编辑产品";
                 model=BLL.productbll.getmodel(id);
                 BindProduct(model.Pid);
             }
             else
             {
-                ViewBag.opera = "添加产品";
                 BindProduct();
             }
             return View(model);
@@ -331,6 +282,7 @@ namespace vt.Controllers
             model.Pid = Convert.ToInt32(model.Pid);
             model.sort = Convert.ToInt32(model.sort);
             model.isHide = Convert.ToBoolean(model.isHide);
+            model.Isindex = Convert.ToBoolean(model.Isindex);
             model.CDate = model.CDate.Year == 1 ? DateTime.Now : model.CDate;
             model.Content = string.IsNullOrEmpty(model.Content) ? "" : model.Content;
             if (model.ID > 0)
@@ -367,6 +319,34 @@ namespace vt.Controllers
                     return Content("<script>alert('删除成功');location.href='/Admin/Journalism'</script>");
                 }
             }
+            if (name == "Friendship")
+            {
+                if(BLL.Friendshipbll.delete(id)>0)
+                {
+                    return Content("<script>alert('删除成功');location.href='/Admin/Friendship'</script>");
+                }
+            }
+            if(name=="Message")
+            {
+                if(BLL.Messagebll.delete(id)>0)
+                {
+                    return Content("<script>alert('删除成功');location.href='/Admin/Message'</script>");
+                }
+            }
+            if(name=="Cases")
+            {
+                if (BLL.Casesbll.delete(id) > 0)
+                {
+                    return Content("<script>alert('删除成功');location.href='/Admin/Cases'</script>");
+                }
+            }
+            if(name=="Rotation")
+            {
+                if (BLL.Rotationbll.delete(id) > 0)
+                {
+                    return Content("<script>alert('删除成功');location.href='/Admin/Rotation'</script>");
+                }
+            }
             return null;
         }
         public ActionResult UpdatProHide(string ishide,string id,string name="")
@@ -381,19 +361,26 @@ namespace vt.Controllers
                 BLL.Journalism.UpdatHide(ishide, id);
                 return Content("<script>alert('修改成功！');location.href='/Admin/Journalism';</script>");
             }
+            if (name == "Friendship")
+            {
+                BLL.Friendshipbll.UpdatHide(ishide, id);
+                    return Content("<script>alert('修改成功');location.href='/Admin/Friendship'</script>");
+            }
+            if (name == "Cases")
+            {
+                BLL.Casesbll.UpdatHide(ishide, id);
+                return Content("<script>alert('修改成功');location.href='/Admin/Cases'</script>");
+            }
+            if (name == "Rotation")
+            {
+                BLL.Rotationbll.UpdatHide(ishide, id);
+                return Content("<script>alert('修改成功');location.href='/Admin/Rotation'</script>");
+            }
             return null;
         }
-        public ActionResult Journalism(string where = "")
+        public ActionResult Journalism()
         {
-            List<DBModel.Journalism> model = new List<DBModel.Journalism>();
-            if (where == "")
-            {
-                model = BLL.Journalism.getlist(0, "id>0 order by Sort");
-            }
-            else
-            {
-                model = BLL.Journalism.getlist(0, "title like '%" + where + "%'");
-            }
+            List<DBModel.Journalism> model = BLL.Journalism.getlist(0,"id>0 order by Sort");
             return View(model);
         }
         public ActionResult Journalism_Edit(int id=0)
@@ -401,13 +388,11 @@ namespace vt.Controllers
             DBModel.Journalism model = new DBModel.Journalism();
             if (id > 0)
             {
-                ViewBag.opera="编辑新闻";
                 model = BLL.Journalism.getmodel(id);
                 BindNews(model.Pid);
             }
             else
             {
-                ViewBag.opera = "添加新闻";
                 BindNews();
             }
             return View(model);
@@ -432,6 +417,7 @@ namespace vt.Controllers
             model.Cdate = model.Cdate.Year == 1 ? DateTime.Now : model.Cdate;
             model.Author = string.IsNullOrEmpty(model.Author) ? "" : model.Author;
             model.Content = string.IsNullOrEmpty(model.Content) ? "" : model.Content;
+            model.Isindex = Convert.ToBoolean(model.Isindex);
             if (model.Id > 0)
             {
                 if (BLL.Journalism.hang(model) > 0)
@@ -446,6 +432,166 @@ namespace vt.Controllers
                 {
                     return Content("<script>alert('添加成功');location.href='/Admin/Journalism'</script>");
                 }
+            }
+            return null;
+        }
+        public ActionResult Friendship()
+        {
+            List<DBModel.Friendship> list = BLL.Friendshipbll.getlist();
+            return View(list);
+        }
+        public ActionResult Friendship_Edit(int id=0)
+        {
+            DBModel.Friendship model = new DBModel.Friendship();
+            if (id > 0)
+            {
+                model = BLL.Friendshipbll.getmodel(id);
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Friendship_Edit(DBModel.Friendship model)
+        {
+            model.Title = string.IsNullOrEmpty(model.Title) ? "" : model.Title;
+            model.Picure = string.IsNullOrEmpty(model.Picure) ? "" : model.Picure;
+            model.LinkUrl = string.IsNullOrEmpty(model.LinkUrl) ? "" : model.LinkUrl;
+            model.Sort = Convert.ToInt32(model.Sort);
+            model.IsHide = Convert.ToBoolean(model.IsHide);
+            model.Cdate = model.Cdate.Year == 1 ? DateTime.Now : model.Cdate;
+            if (model.ID > 0)
+            {
+                if (BLL.Friendshipbll.hang(model) > 0)
+                {
+
+                    return Content("<script>alert('编辑成功');location.href='/Admin/Friendship'</script>");
+                }
+            }
+            else
+            {
+                if (BLL.Friendshipbll.hang(model) > 0)
+                {
+                    return Content("<script>alert('添加成功');location.href='/Admin/Friendship'</script>");
+                }
+            }
+            return null;
+        }
+        public ActionResult Message()
+        {
+            List<DBModel.Message> model = BLL.Messagebll.getlist(0,"Id>0 order by Sort");
+            return View(model);
+        }
+        public ActionResult Message_active(int id)
+        {
+            return View(BLL.Messagebll.getmodel(id));
+        }
+        public ActionResult Cases()
+        {
+            return View(BLL.Casesbll.getlist(0, "Id>0 order by Sort"));
+        }
+        public ActionResult Cases_Edit(int id=0)
+        {
+            DBModel.Cases model = new DBModel.Cases();
+            if (id > 0)
+            {
+                model = BLL.Casesbll.getmodel(id);
+                BindProduct(model.Pid);
+            }
+            else
+            {
+                BindProduct();
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Cases_Edit(DBModel.Cases model)
+        {
+            model.Title = string.IsNullOrEmpty(model.Title) ? "" : model.Title;
+            model.Picure = string.IsNullOrEmpty(model.Picure) ? "" : model.Picure;
+            model.Pid = Convert.ToInt32(model.Pid);
+            model.LinkUrl = string.IsNullOrEmpty(model.LinkUrl) ? "" : model.LinkUrl;
+            model.Sort = Convert.ToInt32(model.Sort);
+            model.IsHide = Convert.ToBoolean(model.IsHide);
+            model.Cdate = model.Cdate.Year == 1 ? DateTime.Now : model.Cdate;
+            model.IsIndex = Convert.ToBoolean(model.IsIndex);
+            model.Content = string.IsNullOrEmpty(model.Content) ? "" : model.Content;
+            model.Market = Convert.ToInt32(model.Market);
+            model.Pirce = Convert.ToInt32(model.Pirce);
+            if (model.Id > 0)
+            {
+                if (BLL.Casesbll.hang(model) > 0)
+                {
+
+                    return Content("<script>alert('编辑成功');location.href='/Admin/Cases'</script>");
+                }
+            }
+            else
+            {
+                if (BLL.Casesbll.hang(model) > 0)
+                {
+                    return Content("<script>alert('添加成功');location.href='/Admin/Cases'</script>");
+                }
+            }
+            return null;
+        }
+        public ActionResult Rotation()
+        {
+            return View(BLL.Rotationbll.getlist(0, "Id>0 order by Sort"));
+        }
+        public ActionResult Rotation_Edit(int id = 0)
+        {
+            DBModel.Rotation model = new DBModel.Rotation();
+            if (id > 0)
+            {
+                model = BLL.Rotationbll.getmodel(id);
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Rotation_Edit(DBModel.Rotation model)
+        {
+            model.Title = string.IsNullOrEmpty(model.Title) ? "" : model.Title;
+            model.Picure = string.IsNullOrEmpty(model.Picure) ? "" : model.Picure;
+            model.LinkUrl = string.IsNullOrEmpty(model.LinkUrl) ? "" : model.LinkUrl;
+            model.Sort = Convert.ToInt32(model.Sort);
+            model.IsHide = Convert.ToBoolean(model.IsHide);
+            model.Content = string.IsNullOrEmpty(model.Content) ? "" : model.Content;
+            model.Neirong = string.IsNullOrEmpty(model.Neirong) ? "" : model.Neirong;
+            if (model.Id > 0)
+            {
+                if (BLL.Rotationbll.hang(model) > 0)
+                {
+
+                    return Content("<script>alert('编辑成功');location.href='/Admin/Rotation'</script>");
+                }
+            }
+            else
+            {
+                if (BLL.Rotationbll.hang(model) > 0)
+                {
+                    return Content("<script>alert('添加成功');location.href='/Admin/Rotation'</script>");
+                }
+            }
+            return null;
+        }
+        public ActionResult UpIsindex(string Isindex,string id,string name)
+        {
+            if(name=="product")
+            {
+                BLL.productbll.UpIsindex(Isindex, id);
+                return Content("<script>alert('修改成功');location.href='/Admin/Product'</script>");
+            }
+            if(name=="Cases")
+            {
+                BLL.Casesbll.UpIsindex(Isindex,id);
+                return Content("<script>alert('修改成功');location.href='/Admin/Cases'</script>");
+            }
+            if(name=="Journalism")
+            {
+                BLL.Journalism.UpIsindex(Isindex,id);
+                return Content("<script>alert('修改成功');location.href='/Admin/Journalism'</script>");
             }
             return null;
         }

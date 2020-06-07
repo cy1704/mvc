@@ -46,7 +46,7 @@ namespace DAL
         {
             if (model.ID > 0)
             {
-                string sql = "update Product set Title=@title,Picure=@Picure,LinkUrl=@LinkUrl,Pid=@Pid,Sort=@sort,IsHide=@isHide,Cdate=@cdate,content=@Content where Id=@ID";
+                string sql = "update Product set Title=@title,Picure=@Picure,LinkUrl=@LinkUrl,Pid=@Pid,Sort=@sort,IsHide=@isHide,Cdate=@cdate,content=@Content,Isindex=@Isindex where Id=@ID";
                 SqlParameter[] p ={
                                  new SqlParameter("@title",model.title),
                                  new SqlParameter("@Picure",model.Picure),
@@ -55,15 +55,16 @@ namespace DAL
                                  new SqlParameter("@sort",model.sort),
                                  new SqlParameter("@isHide",model.isHide),
                                  new SqlParameter("@cdate",model.CDate),
+                                 new SqlParameter("@Isindex",model.Isindex),
                                  new SqlParameter("@content",model.Content),
-                                 new SqlParameter("@ID",model.ID),
+                                 new SqlParameter("@ID",model.ID)
                              };
 
                 return Help.sqlhelp.execute(sql, CommandType.Text, p);
             }
             else
             {
-                string sql = "insert into Product (Title,Picure,LinkUrl,Pid,Sort,IsHide,Cdate,Content) values (@title,@Picure,@LinkUrl,@Pid,@sort,@isHide,@cdate,@content)";
+                string sql = "insert into Product (Title,Picure,LinkUrl,Pid,Sort,IsHide,Cdate,Content,Isindex) values (@title,@Picure,@LinkUrl,@Pid,@sort,@isHide,@cdate,@content,@Isindex)";
                 SqlParameter[] p ={
                                  new SqlParameter("@title",model.title),
                                  new SqlParameter("@Picure",model.Picure),
@@ -72,6 +73,7 @@ namespace DAL
                                  new SqlParameter("@sort",model.sort),
                                  new SqlParameter("@isHide",model.isHide),
                                  new SqlParameter("@cdate",model.CDate),
+                                 new SqlParameter("@Isindex",model.Isindex),
                                  new SqlParameter("@content",model.Content)
                              };
                 return Help.sqlhelp.execute(sql, CommandType.Text, p);
@@ -86,6 +88,12 @@ namespace DAL
         {
             int ss = Convert.ToInt32(!Convert.ToBoolean(isHide));
             string sql = "update Product set IsHide=" + ss + " where id=" + id;
+            return Help.sqlhelp.execute(sql);
+        }
+        public static int UpIsindex(string Isindex,string id)
+        {
+            int ss = Convert.ToInt32(!Convert.ToBoolean(Isindex));
+            string sql = "update Product set IsIndex=" + ss + " where id=" + id;
             return Help.sqlhelp.execute(sql);
         }
     }
